@@ -5,6 +5,8 @@ dist
 tmp
 out-tsc
 *.tsbuildinfo
+target/
+.mvn/wrapper/maven-wrapper.jar
 .expo
 .expo-shared
 

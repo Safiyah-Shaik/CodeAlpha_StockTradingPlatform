@@ -1,44 +1,44 @@
-# [Project name]
+# Stock Trading Platform Backend
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A beginner-friendly Java and Spring Boot REST API for a simulated stock-trading platform.
 
 ## Run & Operate
 
-- `pnpm --filter @workspace/api-server run dev` — run the API server (port 5000)
-- `pnpm run typecheck` — full typecheck across all packages
-- `pnpm run build` — typecheck + build all packages
-- `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
-- `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
-- Required env: `DATABASE_URL` — Postgres connection string
+- `pnpm --filter @workspace/api-server run dev` — run the Spring Boot API (uses `PORT`, defaults to 8080)
+- `pnpm --filter @workspace/api-server run typecheck` — compile the Java backend
+- `pnpm --filter @workspace/api-server run build` — package the backend with Maven
 
 ## Stack
 
-- pnpm workspaces, Node.js 24, TypeScript 5.9
-- API: Express 5
-- DB: PostgreSQL + Drizzle ORM
-- Validation: Zod (`zod/v4`), `drizzle-zod`
-- API codegen: Orval (from OpenAPI spec)
-- Build: esbuild (CJS bundle)
+- Java 17, Spring Boot, Maven
+- In-memory Java collections; no database or external financial API
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- `artifacts/api-server/src/main/java/com/codealpha/stocktrading/model` — stock, user, portfolio, holding, and transaction models
+- `artifacts/api-server/src/main/java/com/codealpha/stocktrading/service` — stock search and trading calculations
+- `artifacts/api-server/src/main/java/com/codealpha/stocktrading/controller` — REST endpoints and API error responses
+- `artifacts/api-server/src/main/java/com/codealpha/stocktrading/repository` — in-memory stock, user, and transaction collections
 
 ## Architecture decisions
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- Trades are simulated against fixed mock prices; no external market data is used.
+- Portfolio profit/loss reports unrealized gains on current holdings. Overall performance compares account value to the initial cash and includes realized trade results.
+- All data resets when the API process restarts.
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Lists and searches mock stocks, executes simulated buy/sell trades, and reports holdings, transactions, and account performance.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Keep the implementation beginner-friendly and use Java, Spring Boot, and Maven only for the backend.
+- Do not add a database, frontend, or deployment unless requested.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- The API runs at `/api`; trade requests use JSON with `symbol` and a positive integer `quantity`.
+- Since all repositories are in memory, each application restart restores the initial demo user and empty portfolio.
 
 ## Pointers
 
