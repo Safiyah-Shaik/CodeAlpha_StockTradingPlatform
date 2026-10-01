@@ -2,7 +2,7 @@ modules = ["nodejs-24", "java-graalvm22.3"]
 
 [deployment]
 router = "application"
-deploymentTarget = "autoscale"
+deploymentTarget = "vm"
 
 [deployment.postBuild]
 args = ["pnpm", "store", "prune"]

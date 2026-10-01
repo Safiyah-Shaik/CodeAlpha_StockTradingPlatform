@@ -1,0 +1,91 @@
+Now prepare my CodeAlpha Stock Trading Platform for final deployment.
+
+IMPORTANT:
+- Keep the Java + Spring Boot backend.
+- Keep the existing HTML/CSS/vanilla JavaScript frontend.
+- Do NOT replace Java with Node.js, Python, PHP, or another backend.
+- Do NOT add a database.
+- Do NOT use external financial APIs.
+- Do not change working functionality unless required for deployment.
+
+1. DEPLOYMENT PREPARATION
+Make sure the Spring Boot application can run in the Replit production environment.
+
+Use the PORT environment variable for the server port if required.
+
+Make sure there are no hardcoded localhost URLs in the frontend.
+Use relative API paths such as:
+ /api/stocks
+ /api/portfolio
+ /api/portfolio/performance
+ /api/transactions
+ /api/trade/buy
+ /api/trade/sell
+
+2. BUILD
+Run the complete Maven build.
+Run the frontend build.
+Fix any deployment-related errors.
+
+3. PRODUCTION CHECK
+Verify:
+- Application starts successfully
+- Frontend loads
+- Stocks load
+- Dashboard loads
+- Portfolio loads
+- Performance loads
+- Transactions load
+- Buy works
+- Sell works
+- Backend validation errors are displayed
+- No obvious browser console errors
+- API requests use the deployed application's relative paths
+
+4. FINAL PROJECT
+Make sure the project is GitHub-ready.
+
+Project name:
+CodeAlpha_StockTradingPlatform
+
+Make sure README.md is complete and includes:
+- Project Overview
+- Features
+- Technologies Used
+- Java OOP Concepts
+- Application Structure
+- How Trading Simulation Works
+- API Endpoints
+- How to Run Locally
+- How to Build
+- Example Buy Workflow
+- Example Sell Workflow
+- Validation Rules
+- Screenshots
+- CodeAlpha Java Programming Internship
+- Task 2
+
+Include this exact statement:
+
+"This application uses simulated stock market data for educational purposes and is not connected to real financial markets."
+
+5. DEPLOY
+Publish/deploy the application using Replit's supported deployment method.
+
+After deployment:
+- Open the deployed URL
+- Verify the frontend loads
+- Verify the Java API works through the deployed frontend
+- Test one Buy and one Sell
+- Confirm the dashboard updates
+
+IMPORTANT:
+Do not use real money or real stock trading.
+This remains a simulated educational stock-trading application.
+
+At the end, report:
+- Build result
+- Deployment result
+- Deployed URL
+- Important files
+- Any remaining issue
