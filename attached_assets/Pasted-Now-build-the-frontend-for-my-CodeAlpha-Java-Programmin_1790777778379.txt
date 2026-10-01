@@ -1,0 +1,178 @@
+Now build the frontend for my CodeAlpha Java Programming Internship Task 2: Stock Trading Platform.
+
+IMPORTANT:
+- Keep the existing Java + Spring Boot backend unchanged and working.
+- Do NOT replace the Java backend with Node.js, Express, Python, PHP, or a JavaScript backend.
+- Do NOT add a database.
+- Do NOT use external financial APIs.
+- Build only the frontend now using HTML, CSS, and vanilla JavaScript.
+- Connect the frontend to the existing Java Spring Boot REST APIs.
+- Do not create fake frontend-only trading logic. Buy and Sell must call the real Java backend APIs.
+- Do not deploy yet.
+
+FRONTEND DESIGN:
+Create a professional modern responsive Stock Trading Platform dashboard.
+Theme:
+- Dark navy/blue primary theme
+- Green for positive values
+- Red for negative values
+- White/light cards
+- Rounded corners
+- Subtle shadows
+- Good spacing
+- Smooth hover transitions
+- Responsive for desktop, tablet and mobile
+
+HEADER:
+Show:
+"Stock Trading Platform"
+Subtitle:
+"Simulated Market & Portfolio Dashboard"
+Show a small "Market Open" indicator.
+Also clearly mention that this is simulated market data and not a real trading platform.
+
+DASHBOARD SUMMARY CARDS:
+Display:
+1. Available Cash
+2. Portfolio Value
+3. Total Invested
+4. Total Profit/Loss
+5. Profit/Loss %
+
+Load these values from the Java backend.
+After every successful Buy/Sell, refresh the dashboard automatically.
+
+MARKET SECTION:
+Display all stocks from GET /api/stocks.
+
+Stocks:
+AAPL - Apple Inc.
+GOOGL - Alphabet Inc.
+MSFT - Microsoft Corporation
+AMZN - Amazon
+TSLA - Tesla Inc.
+NVDA - NVIDIA Corporation
+META - Meta Platforms
+
+For every stock show:
+- Symbol
+- Company name
+- Current price
+- Price change
+- Buy button
+
+Add:
+- Search by symbol/company name
+- Sort by price
+- Sort by price change
+
+BUY UI:
+When the user clicks Buy:
+- Open a clean modal/form.
+- Show selected stock and current price.
+- Allow quantity input.
+- Validate quantity > 0.
+- Call POST /api/trade/buy.
+- Show success or error notification.
+- Close modal after successful trade.
+- Refresh dashboard, portfolio and transactions.
+
+SELL UI:
+When the user clicks Sell from a portfolio holding:
+- Open a clean modal/form.
+- Show selected stock, current price and owned quantity.
+- Allow quantity input.
+- Validate quantity > 0 and not greater than owned quantity.
+- Call POST /api/trade/sell.
+- Show success or error notification.
+- Refresh dashboard, portfolio and transactions.
+
+PORTFOLIO SECTION:
+Load data from GET /api/portfolio.
+
+Create a table/card layout showing:
+- Symbol
+- Company
+- Quantity
+- Average Buy Price
+- Current Price
+- Current Value
+- Profit/Loss
+- Profit/Loss %
+
+Use green for positive P/L and red for negative P/L.
+
+If there are no holdings, show a professional empty-state message.
+
+PERFORMANCE SECTION:
+Load data from GET /api/portfolio/performance.
+
+Show:
+- Initial Cash
+- Current Cash
+- Total Invested
+- Current Portfolio Value
+- Total Account Value
+- Total Profit/Loss
+- Return %
+
+Use a simple visual indicator for positive/negative performance.
+Do not show predictions or misleading charts.
+
+TRANSACTION HISTORY:
+Load data from GET /api/transactions.
+
+Display newest transactions first.
+
+Columns:
+- Type
+- Stock
+- Company
+- Quantity
+- Price
+- Total
+- Timestamp
+
+Clearly distinguish BUY and SELL transactions using badges.
+
+Add a search box for transactions.
+
+GENERAL BEHAVIOR:
+- Show loading states while API requests are running.
+- Show friendly error messages if an API fails.
+- Handle empty portfolio and empty transaction history.
+- Format money consistently to 2 decimal places.
+- Use accessible labels and buttons.
+- Make the UI keyboard-friendly.
+- Add visible focus states.
+- Do not hardcode portfolio values or transaction history.
+- All dynamic trading data must come from the Java backend.
+
+API CONNECTION:
+Use relative API URLs such as:
+fetch('/api/stocks')
+fetch('/api/portfolio')
+fetch('/api/portfolio/performance')
+fetch('/api/transactions')
+fetch('/api/trade/buy')
+fetch('/api/trade/sell')
+
+Make sure the frontend works with the existing Java Spring Boot backend.
+
+IMPORTANT:
+- Do not modify or break the existing Java backend.
+- Do not add a database.
+- Do not deploy yet.
+- After creating the frontend, run the application and verify:
+  1. Stocks load
+  2. Portfolio loads
+  3. Performance loads
+  4. Transactions load
+  5. Buy works
+  6. Sell works
+  7. Dashboard updates after Buy/Sell
+  8. Invalid quantity shows an error
+  9. Insufficient cash/shares errors from backend are displayed
+  10. No obvious frontend console errors
+
+Make the final UI polished enough for a 2–3 minute CodeAlpha internship demonstration.

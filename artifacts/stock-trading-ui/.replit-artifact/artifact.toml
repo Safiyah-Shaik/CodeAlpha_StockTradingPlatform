@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Stock Trading Platform"
+description = "A responsive simulated stock-trading dashboard connected to the existing Java Spring Boot API for stocks, buy and sell trades, portfolio values, performance, and transaction history."
+version = "1.0.0"
+id = "artifacts/stock-trading-ui"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18568
+
+[services.development]
+run = "pnpm --filter @workspace/stock-trading-ui run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/stock-trading-ui", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/stock-trading-ui/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18568"
+BASE_PATH = "/"

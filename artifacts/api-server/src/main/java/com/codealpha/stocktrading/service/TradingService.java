@@ -36,7 +36,7 @@ public class TradingService {
         this.transactionRepository = transactionRepository;
     }
 
-    public TradeResponse buyStock(String symbol, int quantity) {
+    public synchronized TradeResponse buyStock(String symbol, int quantity) {
         validateQuantity(quantity);
         Stock stock = stockService.findStock(symbol);
         User user = userRepository.findDemoUser();
@@ -76,7 +76,7 @@ public class TradingService {
         return new TradeResponse(transaction, user.getCashBalance());
     }
 
-    public TradeResponse sellStock(String symbol, int quantity) {
+    public synchronized TradeResponse sellStock(String symbol, int quantity) {
         validateQuantity(quantity);
         Stock stock = stockService.findStock(symbol);
         User user = userRepository.findDemoUser();
@@ -106,25 +106,25 @@ public class TradingService {
         return new TradeResponse(transaction, user.getCashBalance());
     }
 
-    public BigDecimal calculatePortfolioValue() {
+    public synchronized BigDecimal calculatePortfolioValue() {
         return userRepository.findDemoUser().getPortfolio().getHoldings().values().stream()
                 .map(holding -> holding.getStock().getCurrentPrice()
                         .multiply(BigDecimal.valueOf(holding.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public BigDecimal calculateTotalInvested() {
+    public synchronized BigDecimal calculateTotalInvested() {
         return userRepository.findDemoUser().getPortfolio().getHoldings().values().stream()
                 .map(holding -> holding.getAverageBuyPrice()
                         .multiply(BigDecimal.valueOf(holding.getQuantity())))
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    public BigDecimal calculateProfitLoss() {
+    public synchronized BigDecimal calculateProfitLoss() {
         return calculatePortfolioValue().subtract(calculateTotalInvested());
     }
 
-    public BigDecimal calculateProfitLossPercentage() {
+    public synchronized BigDecimal calculateProfitLossPercentage() {
         BigDecimal invested = calculateTotalInvested();
         if (invested.compareTo(BigDecimal.ZERO) == 0) {
             return BigDecimal.ZERO.setScale(2, RoundingMode.HALF_UP);
@@ -134,7 +134,7 @@ public class TradingService {
                 .divide(invested, 2, RoundingMode.HALF_UP);
     }
 
-    public PortfolioResponse getPortfolio() {
+    public synchronized PortfolioResponse getPortfolio() {
         User user = userRepository.findDemoUser();
         return new PortfolioResponse(
                 user.getCashBalance(),
@@ -146,7 +146,7 @@ public class TradingService {
         );
     }
 
-    public PerformanceResponse calculatePerformance() {
+    public synchronized PerformanceResponse calculatePerformance() {
         User user = userRepository.findDemoUser();
         BigDecimal portfolioValue = calculatePortfolioValue();
         BigDecimal accountValue = user.getCashBalance().add(portfolioValue);
@@ -166,7 +166,7 @@ public class TradingService {
         );
     }
 
-    public List<Transaction> getTransactions() {
+    public synchronized List<Transaction> getTransactions() {
         return transactionRepository.findAll();
     }
 

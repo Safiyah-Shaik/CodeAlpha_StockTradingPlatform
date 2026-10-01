@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <title>Stock Trading Platform — Simulated Portfolio</title>
+    <meta name="description" content="A simulated market and portfolio dashboard for the CodeAlpha internship demo." />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Stock Trading Platform" />
+    <meta property="og:description" content="A simulated market and portfolio dashboard for the CodeAlpha internship demo." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Stock Trading Platform" />
+    <meta name="twitter:description" content="A simulated market and portfolio dashboard for the CodeAlpha internship demo." />
+    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./src/index.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="topbar">
+        <div class="topbar-inner">
+          <div class="brand-lockup">
+            <div class="brand-mark" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M4 17.5 9 12l3 2.8 7-8.3M14.5 6.5H19V11" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 20h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+            <div>
+              <h1 class="brand-title">Stock Trading Platform</h1>
+              <p class="brand-subtitle">Simulated Market &amp; Portfolio Dashboard</p>
+            </div>
+          </div>
+          <div class="header-meta">
+            <span class="market-status"><span class="status-dot" aria-hidden="true"></span>Market Open</span>
+            <span class="header-date" id="current-date"></span>
+          </div>
+        </div>
+      </header>
+      <main class="page">
+        <div class="disclaimer" role="note">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="7.6" stroke="currentColor" stroke-width="1.5"/><path d="M10 9v4M10 6.2h.01" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          <span><strong>Simulation only.</strong> Market data and trades in this internship demo are simulated. This is not a real trading platform and no real money or securities are involved.</span>
+        </div>
+
+        <section aria-labelledby="overview-heading">
+          <h2 class="section-kicker" id="overview-heading">Account overview</h2>
+          <div class="summary-grid">
+            <article class="summary-card"><div class="summary-label">Available Cash</div><div class="summary-value" id="summary-cash" aria-live="polite">—</div><div class="summary-foot" id="summary-cash-foot">Loading account</div></article>
+            <article class="summary-card"><div class="summary-label">Portfolio Value</div><div class="summary-value" id="summary-portfolio" aria-live="polite">—</div><div class="summary-foot">Current holdings</div></article>
+            <article class="summary-card"><div class="summary-label">Total Invested</div><div class="summary-value" id="summary-invested" aria-live="polite">—</div><div class="summary-foot">Cost basis</div></article>
+            <article class="summary-card"><div class="summary-label">Total Profit / Loss</div><div class="summary-value" id="summary-pl" aria-live="polite">—</div><div class="summary-foot">Across your account</div></article>
+            <article class="summary-card"><div class="summary-label">Profit / Loss %</div><div class="summary-value" id="summary-pct" aria-live="polite">—</div><div class="summary-foot">Portfolio return</div></article>
+          </div>
+        </section>
+
+        <div class="dashboard-grid">
+          <section class="panel market-panel" aria-labelledby="market-heading">
+            <div class="panel-head">
+              <div><h2 class="panel-title" id="market-heading">Market watch</h2><p class="panel-caption" id="market-count">Live simulated prices</p></div>
+              <div class="panel-tools">
+                <label class="search-wrap"><span class="sr-only">Search stocks by symbol or company</span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.6"/><path d="m13.2 13.2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input class="field-control search-input" id="stock-search" type="search" placeholder="Search stocks" autocomplete="off"></label>
+                <label class="sr-only" for="stock-sort">Sort market stocks</label>
+                <select class="field-control sort-select" id="stock-sort">
+                  <option value="symbol">Sort: Symbol</option><option value="price-high">Price: High to low</option><option value="price-low">Price: Low to high</option><option value="change-high">Change: High to low</option><option value="change-low">Change: Low to high</option>
+                </select>
+                <button class="icon-button" id="refresh-button" type="button" aria-label="Refresh dashboard" title="Refresh dashboard">
+                  <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M16.3 8A6.5 6.5 0 0 0 5 5.2L3.7 6.5M3.7 6.5V3.8M3.7 6.5h2.8M3.7 12a6.5 6.5 0 0 0 11.3 2.8l1.3-1.3m0 0v2.7m0-2.7h-2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+              </div>
+            </div>
+            <div class="table-scroll">
+              <table aria-label="Simulated stock market prices">
+                <thead><tr><th scope="col">Stock</th><th scope="col">Price</th><th scope="col">Change</th><th scope="col"><span class="sr-only">Trade action</span></th></tr></thead>
+                <tbody id="market-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel" aria-labelledby="holdings-heading">
+            <div class="panel-head">
+              <div><h2 class="panel-title" id="holdings-heading">Your holdings</h2><p class="panel-caption">Positions in your simulated portfolio</p></div>
+            </div>
+            <div class="table-scroll">
+              <table class="portfolio-table" aria-label="Portfolio holdings">
+                <thead><tr><th scope="col">Holding</th><th scope="col">Shares</th><th scope="col">Avg. buy price</th><th scope="col">Current price</th><th scope="col">Current value</th><th scope="col">P/L</th><th scope="col">P/L %</th><th scope="col"><span class="sr-only">Trade action</span></th></tr></thead>
+                <tbody id="holdings-body"></tbody>
+              </table>
+            </div>
+          </section>
+        </div>
+
+        <section class="panel performance-panel" aria-labelledby="performance-heading">
+          <div class="performance-head">
+            <div><h2 class="performance-title" id="performance-heading">Account performance</h2><p class="performance-copy">A clear snapshot of your account. No projections or predictions.</p></div>
+            <div class="return-indicator" id="return-indicator" aria-live="polite">
+              <div class="return-label">Overall return</div><div class="return-value" id="performance-return">—</div>
+              <div class="return-track" aria-hidden="true"><span id="return-track-fill"></span></div>
+            </div>
+          </div>
+          <div class="performance-values" id="performance-values"></div>
+        </section>
+
+        <section class="panel transactions-panel" aria-labelledby="transactions-heading">
+          <div class="panel-head">
+            <div><h2 class="panel-title" id="transactions-heading">Transaction history</h2><p class="panel-caption" id="transactions-count">Most recent activity first</p></div>
+            <div class="panel-tools">
+              <label class="search-wrap"><span class="sr-only">Search transactions</span><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="8.8" cy="8.8" r="5.8" stroke="currentColor" stroke-width="1.6"/><path d="m13.2 13.2 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg><input class="field-control search-input" id="transaction-search" type="search" placeholder="Search activity" autocomplete="off"></label>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="transaction-table" aria-label="Transaction history">
+              <thead><tr><th scope="col">Type</th><th scope="col">Stock</th><th scope="col">Company</th><th scope="col">Quantity</th><th scope="col">Price</th><th scope="col">Total</th><th scope="col">Date &amp; time</th></tr></thead>
+              <tbody id="transactions-body"></tbody>
+            </table>
+          </div>
+        </section>
+        <p class="footer-note">For demonstration purposes only · Data supplied by the simulated market service</p>
+      </main>
+    </div>
+
+    <dialog class="dialog" id="trade-dialog" aria-labelledby="dialog-title">
+      <form class="dialog-inner" id="trade-form" novalidate>
+        <div class="dialog-top">
+          <div><h2 class="dialog-title" id="dialog-title">Buy stock</h2><p class="dialog-copy" id="dialog-copy">Enter a share quantity to place a simulated order.</p></div>
+          <button class="close-dialog" type="button" id="close-dialog" aria-label="Close trade dialog"><svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m5 5 10 10M15 5 5 15" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></button>
+        </div>
+        <div class="trade-stock-card">
+          <div class="stock-id"><div class="ticker-badge" id="dialog-symbol-badge"></div><div><div class="ticker-symbol" id="dialog-symbol"></div><div class="company-name" id="dialog-company"></div></div></div>
+          <div class="trade-current-price"><span class="trade-price-label">Current price</span><span id="dialog-price"></span></div>
+        </div>
+        <label class="form-label" for="quantity-input">Quantity (shares)</label>
+        <input class="quantity-input" id="quantity-input" name="quantity" type="number" min="1" step="1" inputmode="numeric" placeholder="Enter whole shares" required>
+        <div class="quantity-hint" id="quantity-hint">Enter a whole number of shares greater than zero.</div>
+        <div class="dialog-error" id="dialog-error" role="alert" aria-live="polite"></div>
+        <div class="dialog-actions"><button class="btn btn-secondary" type="button" id="cancel-trade">Cancel</button><button class="btn btn-primary" type="submit" id="submit-trade">Confirm buy</button></div>
+      </form>
+    </dialog>
+    <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="false"></div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

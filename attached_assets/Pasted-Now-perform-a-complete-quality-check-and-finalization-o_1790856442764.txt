@@ -1,0 +1,124 @@
+Now perform a complete quality check and finalization of my CodeAlpha Java Programming Internship Task 2: Stock Trading Platform.
+
+IMPORTANT:
+- Keep the existing Java + Spring Boot backend.
+- Keep the existing HTML/CSS/vanilla JavaScript frontend.
+- Do NOT replace Java with Node.js, Python, PHP, or another backend.
+- Do NOT add a database.
+- Do NOT use external financial APIs.
+- Do NOT deploy yet.
+
+1. BACKEND CHECK
+Verify all Java code and fix any compilation or runtime errors.
+
+Verify these APIs:
+GET /api/stocks
+GET /api/stocks/{symbol}
+GET /api/stocks/search?keyword=
+GET /api/portfolio
+GET /api/portfolio/performance
+GET /api/transactions
+POST /api/trade/buy
+POST /api/trade/sell
+
+Test:
+- Valid Buy
+- Valid Sell
+- Invalid quantity
+- Zero quantity
+- Negative quantity
+- Invalid stock symbol
+- Insufficient cash
+- Insufficient shares
+- Selling the final shares removes the holding
+- Weighted average buy price
+- Portfolio value
+- Total invested
+- Profit/Loss
+- Profit/Loss percentage
+- Transaction history
+- No negative cash balance
+
+2. FRONTEND CHECK
+Verify:
+- Stocks load correctly
+- Dashboard values load correctly
+- Portfolio loads correctly
+- Performance loads correctly
+- Transactions load correctly
+- Search works
+- Sorting works
+- Buy modal/form works
+- Sell modal/form works
+- Successful Buy refreshes dashboard and portfolio
+- Successful Sell refreshes dashboard and portfolio
+- Backend errors are displayed clearly
+- Empty portfolio state works
+- Empty transaction state works
+- Loading states work
+- No obvious browser console errors
+- Responsive layout works on desktop and mobile
+
+3. UI QUALITY
+Fix only genuine issues you find.
+Make sure:
+- Dark navy/blue professional theme
+- Green positive values
+- Red negative values
+- Clear buttons
+- Good spacing
+- Responsive cards/tables
+- Accessible labels
+- Keyboard-friendly controls
+- Visible focus states
+- Professional notifications
+- Consistent money formatting
+
+4. CODE QUALITY
+Keep the Java code beginner-friendly and easy to explain in an internship presentation.
+Make sure Java OOP concepts are clearly represented:
+- Classes and objects
+- Encapsulation
+- Constructors
+- Getters/setters
+- HashMap
+- ArrayList
+- Enum
+- Service classes
+- DTOs where appropriate
+
+5. README
+Create/update README.md with these sections:
+
+- Project Overview
+- Features
+- Technologies Used
+- Java OOP Concepts
+- Application Structure
+- How Trading Simulation Works
+- API Endpoints
+- How to Run Locally
+- How to Build
+- Example Buy Workflow
+- Example Sell Workflow
+- Validation Rules
+- Screenshots
+- CodeAlpha Java Programming Internship
+- Task 2
+
+Include this exact statement:
+
+"This application uses simulated stock market data for educational purposes and is not connected to real financial markets."
+
+6. FINAL BUILD
+Run the Maven build and fix any errors.
+Make sure the complete application starts successfully.
+
+Do not deploy yet.
+
+At the end, give me a concise report containing:
+- What was checked
+- What was fixed
+- Build result
+- Important files created/updated
+- Any remaining issue, if there is one

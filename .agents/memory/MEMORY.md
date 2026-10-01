@@ -1,0 +1,1 @@
+- [Responsive table message states](responsive-table-message-states.md) — compact empty/error states must override table min-width rules to avoid clipped mobile content.
